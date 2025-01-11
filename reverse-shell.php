@@ -3,7 +3,7 @@
  * Plugin Name: Reverse Shell
  * Description: A plugin that provides reverse shell functionality with a hacker-style GUI for configuration.
  * Version: 1.3
- * Author: 
+ * Author: 4m3rr0r
  */
 
 if (!defined('ABSPATH')) {
