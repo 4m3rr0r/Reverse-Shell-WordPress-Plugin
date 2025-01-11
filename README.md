@@ -14,9 +14,20 @@ A WordPress plugin that provides reverse shell functionality with a graphical us
 1. Download the plugin file (`reverse-shell.zip`).
 2. Log in to your WordPress admin panel.
 3. Navigate to **Plugins > Add New**.
+
+    <img src="./Images/2025-01-11_21-39.png" alt="alt text" width="400" />
+
+
 4. Click the **Upload Plugin** button.
 5. Upload the downloaded `reverse-shell.zip` file.
+
+    <img src="./Images/2025-01-11_21-41_1.png" alt="alt text" width="400" />
+    
+    <img src="./Images/2025-01-11_21-41.png" alt="alt text" width="400" />
+
 6. After uploading, click **Activate** to enable the plugin.
+
+    <img src="./Images/2025-01-11_21-41_1.png" alt="alt text" width="400" />
 
 ## Usage
 
@@ -24,7 +35,12 @@ A WordPress plugin that provides reverse shell functionality with a graphical us
 2. Go to **Reverse Shell** in the admin menu to configure the plugin.
 3. Enter the **IP Address** and **Port Number** where you want the reverse shell to connect.
 4. Click **Connect** to establish the reverse shell connection.
+
+    <img src="./Images/2025-01-11_21-43.png" alt="alt text" width="400" />
+
 5. If the connection is successful, commands from the server will be executed on the target machine, and the output will be sent back to your machine.
+
+    <img src="./Images/2025-01-11_21-38.png" alt="alt text" width="400" />
 
 ## Error Handling
 
