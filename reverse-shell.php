@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: Reverse Shell
- * Description: A plugin that provides reverse shell functionality with GUI for configuration.
- * Version: 1.2
- * Author: 4m3rr0r
+ * Description: A plugin that provides reverse shell functionality with a hacker-style GUI for configuration.
+ * Version: 1.3
+ * Author: 
  */
 
 if (!defined('ABSPATH')) {
@@ -44,26 +44,59 @@ function reverse_shell_settings_page() {
     </div>
 
     <style>
+        body {
+            background-color: #000;
+            color: #0f0;
+            font-family: "Courier New", Courier, monospace;
+        }
+        .wrap {
+            border: 2px solid #0f0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px #0f0;
+        }
+        h1 {
+            text-align: center;
+            color: #0f0;
+            text-shadow: 0 0 10px #0f0;
+        }
         .rs-form-group {
             margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .rs-form-group label {
             font-weight: bold;
-            margin-right: 10px;
+            margin-bottom: 5px;
+            font-size: 1.2em;
+            text-shadow: 0 0 5px #0f0;
         }
         .rs-form-group input {
-            padding: 5px;
-            width: 300px;
+            padding: 10px;
+            background-color: #222;
+            color: #0f0;
+            border: 2px solid #0f0;
+            border-radius: 5px;
+            width: 60%;
+            text-align: center;
+            box-shadow: 0 0 10px #0f0;
+        }
+        .rs-form-group input:focus {
+            outline: none;
+            box-shadow: 0 0 20px #0f0;
         }
         .rs-form-group input[type="submit"] {
             width: auto;
-            background-color: #0073aa;
-            color: white;
-            border: none;
             cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+            background-color: green; /* Green button color */
+            color: #fff;
         }
         .rs-form-group input[type="submit"]:hover {
-            background-color: #006799;
+            background-color: darkgreen; /* Dark green on hover */
+            color: #fff;
         }
     </style>
     <?php
@@ -109,4 +142,3 @@ function reverse_shell_plugin_deactivation() {
     delete_option('rs_port');
 }
 register_deactivation_hook(__FILE__, 'reverse_shell_plugin_deactivation');
-
