@@ -11,7 +11,7 @@ A WordPress plugin that provides reverse shell functionality with a graphical us
 
 ## Installation
 
-1. Download the plugin file <a href="https://github.com/4m3rr0r/Reverse-Shell-WordPress-Plugin/releases/download/v1.3.0/reverse-shell.v1.3.0.zip" download="reverse-shell.zip">(`reverse-shell.zip`).</a>
+1. Download the plugin file <a href="https://github.com/4m3rr0r/Reverse-Shell-WordPress-Plugin/releases/tag/v1.4.0" download="reverse-shell.zip">(`reverse-shell.zip`).</a>
 2. Log in to your WordPress admin panel.
 3. Navigate to **Plugins > Add New**.
 
