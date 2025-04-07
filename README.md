@@ -57,7 +57,7 @@ A WordPress plugin that provides reverse shell functionality with a graphical us
 
 ## Changelog
 
-### Version 1.3
+### Version 1.4
 - Initial release with basic reverse shell functionality.
 
 ## License
