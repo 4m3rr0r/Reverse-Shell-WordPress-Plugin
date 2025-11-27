@@ -51,11 +51,6 @@ A WordPress plugin that provides reverse shell functionality with a graphical us
 - Upon activation, the plugin will set default values for IP and port: `127.0.0.1` and `4444`.
 - Upon deactivation, the plugin will remove these settings from the database.
 
-## Security Warning
-
-**IMPORTANT:** This plugin provides reverse shell functionality, which can be extremely dangerous if misused. Use only in a controlled environment, such as a local testing setup or with explicit permission during penetration testing. Unauthorized use is illegal and unethical.
-
-## Changelog
 
 ### Version 1.4
 - Initial release with basic reverse shell functionality.
