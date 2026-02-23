@@ -1,0 +1,187 @@
+/* ========================= */
+/* 1. WORDPRESS LAYOUT OVERRIDES */
+/* ========================= */
+
+#wpwrap {
+    background: #050505 !important;
+}
+
+#wpcontent {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+#wpbody-content {
+    padding: 0 !important;
+}
+
+/* ========================= */
+/* 2. GLOBAL STYLES */
+/* ========================= */
+
+body {
+    background-color: #050505;
+    color: white;
+}
+
+.text-red {
+    color: #ff3131;
+}
+
+
+a:focus, 
+a:active, 
+div:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* ========================= */
+/* 3. CENTER LAYOUT */
+/* ========================= */
+
+.full-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 140px);
+}
+
+/* ========================= */
+/* 4. CORE PANEL DESIGN */
+/* ========================= */
+
+.panel-box {
+    background: #111;
+    border: 1px solid #ff3131;
+    box-shadow: 0 0 25px rgba(255, 49, 49, 0.5);
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* HOVER EFFECT */
+.panel-box:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 0 35px rgba(255, 49, 49, 0.8);
+}
+
+/* ========================= */
+/* 5. COMPONENTS */
+/* ========================= */
+
+/* DASHBOARD CARDS */
+.card {
+    width: 22rem;
+    background: transparent !important;
+    color: whitesmoke;
+}
+
+.card.panel-box {
+    padding: 15px;
+}
+
+/* FORM BOX */
+.form-box {
+    width: 350px;
+    padding: 20px;
+    background: transparent;
+}
+
+/* TERMINAL BOX */
+.terminal-box {
+    width: 1000px;
+    padding: 20px;
+    background: transparent;
+}
+
+/* ========================= */
+/* 6. INPUTS & FORMS  */
+/* ========================= */
+
+.form-control {
+    background: #111 !important;
+    color: #ff3131 !important;
+    border: 1px solid #ff3131 !important;
+}
+
+.form-control::placeholder {
+    color: white;
+    opacity: 0.7;
+}
+
+
+.form-control:focus {
+    outline: 0 !important;
+    border-color: #ff3131 !important;
+    box-shadow: 0 0 10px rgba(255, 49, 49, 0.7) !important;
+}
+
+.input-group-text {
+    background: black;
+    color: #ff3131;
+    border: 1px solid #ff3131;
+}
+
+/* ========================= */
+/* 7. BUTTONS (BLUE FIX) */
+/* ========================= */
+
+.btn-primary {
+    background-color: #ff3131;
+    border: none;
+    font-size: 1.2rem;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+/* FIX: Override blue focus/active state on buttons */
+.btn-primary:focus, 
+.btn-primary:active, 
+.btn-primary:active:focus {
+    background-color: #cc0000 !important;
+    border-color: #ff3131 !important;
+    outline: none !important;
+    box-shadow: 0 0 15px rgba(255, 49, 49, 0.8) !important;
+}
+
+.btn-primary:hover {
+    background-color: #cc0000;
+}
+
+/* ========================= */
+/* 8. TERMINAL OUTPUT */
+/* ========================= */
+
+#v-out {
+    height: 450px;
+    overflow-y: auto;
+    background: black;
+    padding: 12px;
+    margin-bottom: 10px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    color: white;
+    white-space: pre-wrap !important; 
+    word-wrap: break-word;
+    border: 1px solid #333;
+}
+
+/* ========================= */
+/* 9. ANIMATIONS */
+/* ========================= */
+
+.my-plugin-ui,
+.form-box,
+.terminal-box,
+.card {
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
