@@ -99,7 +99,7 @@ A WordPress plugin that provides reverse shell functionality with a graphical us
 
 <img src="assets/Images/2026-02-23_21-20.png" alt="alt text" width="400" />
 
-<img src="assets/Images/2026-02-23_21-19_1.png" alt="alt text" width="400" />
+<img src="assets/Images/2026-02-23_21-21.png" alt="alt text" width="400" />
 
 ---
 
