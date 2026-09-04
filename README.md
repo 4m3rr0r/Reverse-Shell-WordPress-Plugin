@@ -4,130 +4,153 @@ A WordPress plugin that provides reverse shell functionality with a graphical us
 
 ---
 
-## Version 2.0.0 Highlights
-
-- Modular architecture (separate pages & assets)
-- Web-based terminal (AJAX-powered command execution)
-- Reverse shell engine with dual I/O pipe handling
-- Cross-platform support (Linux / Windows)
-- Bootstrap-powered modern UI
-- WordPress-native integration (hooks, nonces, admin_post)
-- Optimized asset loading (only on plugin pages)
-
----
-
 ## Features
 
 ### Web Terminal Console
-- Execute system commands directly from the browser
-- Real-time output rendering
-- OS-aware prompt (`user@host`)
-- AJAX-based secure request handling
+
+* Execute system commands directly from the browser
+* Real-time output rendering
+* OS-aware prompt (`user@host`)
+* AJAX-based request handling
+* Restricted PHP environment detection
+* Automatic detection of available PHP execution mechanisms
 
 ### Reverse Shell Module
-- Initiates outbound connection to listener
-- Uses `proc_open` for interactive shell handling
-- Supports:
-  - `/bin/sh` (Linux/macOS)
-  - `cmd.exe` (Windows)
-- Non-blocking stream handling for stability
+
+* Initiates outbound connection to a listener
+* Interactive shell handling
+* Supports:
+
+  * `/bin/sh` (Linux/macOS)
+  * `cmd.exe` (Windows)
+* Non-blocking stream handling for stability
 
 ### Dashboard UI
-- Clean navigation panel
-- Modular page structure
-- Interactive cards for quick access
+
+* Clean navigation panel
+* Modular page structure
+* Interactive cards for quick access
 
 ---
 
 ## Installation
 
-1. Download the plugin file <a href="https://github.com/4m3rr0r/Reverse-Shell-WordPress-Plugin/releases/download/v2.0.0/reverse-shell_v2.0.0.zip" download="reverse-shell.zip">(`reverse-shell.zip`).</a>
+1. Download the latest release from the [Releases](https://github.com/4m3rr0r/Reverse-Shell-WordPress-Plugin/releases) page.
+
 2. Log in to your WordPress admin panel.
+
 3. Navigate to **Plugins > Add New**.
 
-    <img src="./assets/Images/2025-01-11_21-39.png" alt="alt text" width="400" />
-
+    <img src="./assets/Images/2025-01-11_21-39.png" alt="WordPress Add Plugins" width="400" />
 
 4. Click the **Upload Plugin** button.
-5. Upload the downloaded `reverse-shell.zip` file.
 
-    <img src="./assets/Images/2025-01-11_21-41_1.png" alt="alt text" width="400" />
-    
-    <img src="./assets/Images/2025-01-11_21-41.png" alt="alt text" width="400" />
+5. Upload the downloaded `reverse-shell_v3.0.0.zip` file.
+
+    <img src="./assets/Images/2025-01-11_21-41_1.png" alt="WordPress Upload Plugin" width="400" />
+
+    <img src="./assets/Images/2025-01-11_21-41.png" alt="WordPress Plugin Upload" width="400" />
 
 6. After uploading, click **Activate** to enable the plugin.
-
-    <img src="./assets/Images/2025-01-11_21-41_1.png" alt="alt text" width="400" />
 
 ---
 
 ## Usage
 
 ### 1. Access Panel
-- Navigate to: **RSWP → Dashboard**
 
-<img src="assets/Images/2026-02-23_21-19.png" alt="alt text" width="400" />
+Navigate to:
+
+**RSWP → Dashboard**
+
+<img src="assets/Images/2026-02-23_21-19.png" alt="RSWP Dashboard" width="400" />
 
 ---
-
 
 ### 2. Web Terminal
-- Go to: **RSWP → Web Terminal**
-- Enter a command
-- Press **Enter**
-- Output will appear in real-time
 
-<img src="assets/Images/2026-02-23_21-19_1.png" alt="alt text" width="400" />
+Navigate to:
+
+**RSWP → Web Terminal**
+
+Enter a command and press **Enter**. The command output will be displayed in the terminal interface.
+
+<img src="assets/Images/2026-02-23_21-19_1.png" alt="RSWP Web Terminal" width="400" />
 
 ---
 
-### 3. Reverse Shell (Lab Use Only)
+### 3. Reverse Shell
 
-1. Start a listener on your machine:
-   ```bash
-   nc -lvnp 4444
-   ```
+Navigate to:
 
-2. Go to:
-   **RSWP → Reverse Shell**
+**RSWP → Reverse Shell**
 
-3. Enter:
-   - Attacker IP
-   - Port
+Configure the required connection parameters for your authorized testing environment.
 
-4. Submit → connection will be attempted
+<img src="assets/Images/2026-02-23_21-20.png" alt="RSWP Reverse Shell Configuration" width="400" />
 
-<img src="assets/Images/2026-02-23_21-20.png" alt="alt text" width="400" />
+<img src="assets/Images/2026-02-23_21-21.png" alt="RSWP Reverse Shell" width="400" />
 
-<img src="assets/Images/2026-02-23_21-21.png" alt="alt text" width="400" />
+> **Lab Use Only:** Use this functionality only on systems where you have explicit authorization to perform security testing.
 
 ---
 
 ## Technical Overview
 
 ### Command Execution (AJAX)
+
 ```php
 add_action('wp_ajax_rswp_web_exec', 'rswp_handle_web_exec');
 ```
 
+The Web Terminal uses a WordPress AJAX endpoint for handling administrative requests.
+
+The plugin checks the PHP environment and detects available execution mechanisms, including configurations where commonly used PHP functions have been disabled.
+
 ### Reverse Shell Engine
-- Uses:
-  - `fsockopen`
-  - `proc_open`
-  - `stream_select`
-- Implements:
-  - Full-duplex communication
-  - Non-blocking streams
+
+The reverse-shell component uses PHP socket and process functionality for interactive communication.
+
+Key components include:
+
+* `fsockopen`
+* `proc_open`
+* `stream_select`
+
+The implementation provides:
+
+* Full-duplex communication
+* Non-blocking streams
+* Process I/O handling
+* OS-specific shell support
+
+---
+
+## Restricted PHP Environments
+
+RSWP can detect commonly restricted PHP execution functions and determine which supported execution mechanisms are available in the current environment.
+
+This allows the plugin to work with a wider range of PHP configurations used in controlled security-testing environments.
 
 ---
 
 ## Supported Environments
 
-| OS        | Shell Used |
-|----------|----------|
-| Linux    | `/bin/sh` |
-| macOS    | `/bin/sh` |
-| Windows  | `cmd.exe` |
+| OS      | Shell Used |
+| ------- | ---------- |
+| Linux   | `/bin/sh`  |
+| macOS   | `/bin/sh`  |
+| Windows | `cmd.exe`  |
+
+---
+
+## Security Notice
+
+This plugin is intended for authorized security research, penetration-testing laboratories, and CTF environments.
+
+Do not use this software against systems without explicit authorization.
+
+The author is not responsible for misuse, unauthorized access, damage, data loss, or other consequences resulting from the use of this software.
 
 ---
 
@@ -135,7 +158,7 @@ add_action('wp_ajax_rswp_web_exec', 'rswp_handle_web_exec');
 
 This plugin is released under the [MIT License](LICENSE).
 
-
+---
 
 ## Star History
 
